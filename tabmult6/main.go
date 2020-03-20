@@ -43,6 +43,8 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+
+	"github.com/01-edu/z01"
 )
 
 func main() {
@@ -50,7 +52,20 @@ func main() {
 	fmt.Printf("%T %v", args[0], args[0])
 	fmt.Println()
 	intargs, err := strconv.Atoi(args[0])
-	fmt.Println(err)
-	fmt.Printf("%T %v", intargs, intargs)
-	fmt.Println()
+	if err == nil {
+		fmt.Printf("%T %v", intargs, intargs)
+		fmt.Println()
+	}
+	z01.PrintRune('1')
+	z01.PrintRune(' ')
+	z01.PrintRune('x')
+	z01.PrintRune(' ')
+	z01.PrintRune(rune(intargs + 48))
+	z01.PrintRune(' ')
+	z01.PrintRune('=')
+	res := 1 * intargs
+	z01.PrintRune(' ')
+	z01.PrintRune(rune(res + 48))
+	z01.PrintRune('\n')
+
 }

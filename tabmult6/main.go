@@ -37,10 +37,10 @@
 
 // student@ubuntu:~/[[ROOT]]/test$
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
 package main
 
 import (
-	"fmt"
 	"os"
 	"strconv"
 
@@ -49,23 +49,37 @@ import (
 
 func main() {
 	args := os.Args[1:]
-	fmt.Printf("%T %v", args[0], args[0])
-	fmt.Println()
-	intargs, err := strconv.Atoi(args[0])
-	if err == nil {
-		fmt.Printf("%T %v", intargs, intargs)
-		fmt.Println()
+	if len(args) != 1 {
+		z01.PrintRune('\n')
+	} else {
+		intargs, err := strconv.Atoi(args[0])
+		if err == nil {
+			if intargs < 0 {
+				z01.PrintRune('\n')
+				return
+			}
+			for x := 1; x < 10; x++ {
+				print(x)
+				z01.PrintRune(' ')
+				z01.PrintRune('x')
+				z01.PrintRune(' ')
+				print(intargs)
+				z01.PrintRune(' ')
+				z01.PrintRune('=')
+				z01.PrintRune(' ')
+				print(x * intargs)
+				z01.PrintRune('\n')
+			}
+		} else {
+			z01.PrintRune('\n')
+			return
+		}
 	}
-	z01.PrintRune('1')
-	z01.PrintRune(' ')
-	z01.PrintRune('x')
-	z01.PrintRune(' ')
-	z01.PrintRune(rune(intargs + 48))
-	z01.PrintRune(' ')
-	z01.PrintRune('=')
-	res := 1 * intargs
-	z01.PrintRune(' ')
-	z01.PrintRune(rune(res + 48))
-	z01.PrintRune('\n')
+}
 
+func print(num int) {
+	if num >= 10 {
+		print(num / 10)
+	}
+	z01.PrintRune(rune(num%10 + 48))
 }

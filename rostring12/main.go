@@ -40,54 +40,47 @@ import (
 )
 
 func main() {
-	if len(os.Args[1:]) != 1 {
-		z01.PrintRune('\n')
+	defer z01.PrintRune('\n')
+	arg := os.Args[1:]
+	if len(arg) != 1 {
 		return
 	}
-	arg := os.Args[1]
-	printMyRune(RotString(string(arg)))
+	printStr(rostring(spacesBegin(spacesEnd(arg[0]))))
 }
 
-func printMyRune(s string) {
+func printStr(s string) {
 	for _, v := range s {
 		z01.PrintRune(v)
 	}
-	z01.PrintRune('\n')
 }
 
-func RotString(s string) string {
-	s = leaveOneSpace(trim(s))
-	for i := 0; i < len(s); i++ {
-		if s[i] == ' ' {
+func spacesBegin(s string) string {
+	for i, _ := range s {
+		if s[0] == ' ' {
+			if s[i] == ' ' && s[i+1] != ' ' {
+				return s[i+1:]
+			}
+		}
+	}
+	return s
+}
+
+func spacesEnd(s string) string {
+	for i := len(s) - 1; i >= 0; i-- {
+		if s[len(s)-1] == ' ' {
+			if s[i] == ' ' && s[i-1] != ' ' {
+				return s[:i]
+			}
+		}
+	}
+	return s
+}
+
+func rostring(s string) string {
+	for i, _ := range s {
+		if s[i] == ' ' && s[i+1] != ' ' {
 			return s[i+1:] + " " + s[:i]
 		}
-		if i == len(s)-1 {
-			return s
-		}
-	}
-	return ""
-}
-
-func leaveOneSpace(s string) string {
-	res := ""
-	for i := 0; i < len(s); i++ {
-		if s[i] == ' ' && s[i+1] == ' ' {
-			continue
-		}
-		res += string(s[i])
-	}
-	return res
-}
-
-func trim(s string) string {
-	if len(s) == 0 {
-		return s
-	}
-	if s[0] == ' ' {
-		return trim(s[1:])
-	}
-	if s[len(s)-1] == ' ' {
-		return trim(s[:len(s)-1])
 	}
 	return s
 }

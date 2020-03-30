@@ -1,7 +1,3 @@
-package main
-
-import "fmt"
-
 ///////////////////////////////////////////////////////////////////////////////
 // atoibaseprog
 // allowedFunctions	[…]
@@ -67,7 +63,13 @@ import "fmt"
 // 125
 // 0
 // student@ubuntu:~/test$
-/////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+package main
+
+import (
+	"fmt"
+)
 
 func main() {
 	fmt.Println(AtoiBase("125", "0123456789"))
@@ -81,15 +83,15 @@ func AtoiBase(s string, base string) int {
 	if !isValid(base) {
 		return 0
 	}
-	res := 0
-	for _, x := range s {
-		for i, y := range base {
-			if x == y {
-				res = res*len(base) + i
+	result := 0
+	for _, vS := range s {
+		for iB, vB := range base {
+			if vS == vB {
+				result = result*len(base) + iB
 			}
 		}
 	}
-	return res
+	return result
 }
 func isValid(s string) bool {
 	if s[0] == '-' || s[0] == '+' {

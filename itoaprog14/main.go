@@ -30,7 +30,9 @@
 
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
 	x := -9223372036854775808
@@ -39,20 +41,37 @@ func main() {
 }
 
 func Itoa(n int) string {
-	nbr := n
-	result := ""
+	mark := n
+	str := ""
 	for n != 0 {
-		index := n % 10
-		fmt.Println(index)
-		if index < 0 {
-
-			index *= -1
+		num := n % 10
+		if num < 0 {
+			num *= -1
 		}
-		result = string(index+48) + result
-		n /= 10
+		str = string(num+'0') + str
+		n = n / 10
 	}
-	if nbr < 0 {
-		result = "-" + result
+	if mark < 0 {
+		return "-" + str
 	}
-	return result
+	return str
 }
+
+// func Itoa(n int) string {
+// 	nbr := n
+// 	result := ""
+// 	for n != 0 {
+// 		index := n % 10
+// 		fmt.Println(index)
+// 		if index < 0 {
+
+// 			index *= -1
+// 		}
+// 		result = string(index+48) + result
+// 		n /= 10
+// 	}
+// 	if nbr < 0 {
+// 		result = "-" + result
+// 	}
+// 	return result
+// }

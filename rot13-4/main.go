@@ -36,7 +36,6 @@
 package main
 
 import (
-	"fmt"
 	"os"
 
 	"github.com/01-edu/z01"
@@ -44,16 +43,29 @@ import (
 
 func main() {
 	args := os.Args[1:]
-	fmt.Printf("%T %v %q", args, args, args)
-	fmt.Println()
-
-	for i := 97; i <= 122; i++ {
-		z01.PrintRune(rune(i))
+	// fmt.Printf("%T %v %q", args, args, args)
+	// fmt.Println()
+	// fmt.Println(args[0])
+	if len(args) == 1 {
+		for i := 0; i < len(args[0]); i++ {
+			if (args[0][i] >= 'a' && args[0][i] < 'n') || (args[0][i] >= 'A' && args[0][i] < 'N') {
+				z01.PrintRune(rune(args[0][i]) + 13)
+			} else if (args[0][i] >= 'n' && args[0][i] <= 'z') || (args[0][i] >= 'N' && args[0][i] <= 'Z') {
+				z01.PrintRune(rune(args[0][i]) - 13)
+			} else {
+				z01.PrintRune(rune(args[0][i]))
+			}
+		}
 	}
-	fmt.Println()
+	z01.PrintRune('\n')
 
-	for i := 'a'; i <= 'b'; i++ {
-		fmt.Print(rune(i))
-	}
-	fmt.Println()
+	// for i := 'A'; i <= 'z'; i++ {
+	// 	z01.PrintRune(rune(i))
+	// }
+	// fmt.Println()
+
+	// for i := 'A'; i <= 'z'; i++ {
+	// 	fmt.Print(rune(i))
+	// }
+	// fmt.Println()
 }
